@@ -1053,6 +1053,24 @@ function(STAR_ADD_EXECUTABLE_STIC star_exec_dir)
 		VERBATIM)
 endfunction()
 
+#
+# Build executable tools in RTS_EXAMPLE
+#
+function(STAR_ADD_EXECUTABLE_RTS_EXAMPLES)
+	file(GLOB rts_main_files "${STAR_SRC}/StRoot/RTS/src/RTS_EXAMPLE/*.C")
+	foreach(main_file ${rts_main_files})
+		get_filename_component(exe ${main_file} NAME_WLE)
+		add_executable(${exe} ${STAR_SRC}/StRoot/RTS/src/RTS_EXAMPLE/${exe}.C)
+		target_link_libraries(${exe} RTS ${ROOT_LIBRARIES})
+		target_include_directories(${exe} BEFORE PRIVATE
+			"${STAR_SRC}/StRoot/RTS/include"
+			"${STAR_SRC}/StRoot/RTS/trg/include"
+			"${STAR_SRC}/StRoot/RTS/src")
+
+		install(TARGETS ${exe}
+			RUNTIME DESTINATION "${STAR_INSTALL_BINDIR}" OPTIONAL)
+	endforeach()
+endfunction()
 
 #
 # Some targets require specific treatment due to missing functionality

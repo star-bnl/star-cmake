@@ -57,6 +57,7 @@ include("cmake/source_properties.cmake")
 star_add_executable_root4star(asps/rexe)
 star_add_executable_stic(asps/staf/sdd/src)
 star_add_executable_agetof(asps/Simulation/agetof)
+star_add_executable_rts_examples()
 
 # Build libraries containing idl/*.idl table descriptions
 star_add_library_table(StDb)
